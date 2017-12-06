@@ -165,6 +165,15 @@
   <data name="EOption_Spacing_Length" xml:space="preserve">
     <value>Spacing&amp;Length</value>
   </data>
+  <data name="HookType_A" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="HookType_B" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="HookType_C" xml:space="preserve">
+    <value>C</value>
+  </data>
   <data name="Page01" xml:space="preserve">
     <value>Global</value>
     <comment>Global</comment>

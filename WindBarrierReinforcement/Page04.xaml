@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:behaviors="clr-namespace:WindBarrierReinforcement.Behaviors"
       xmlns:local="clr-namespace:WindBarrierReinforcement"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Behaviors="clr-namespace:WindBarrierReinforcement.Behaviors" x:Class="WindBarrierReinforcement.Page04"
       mc:Ignorable="d" 
@@ -19,23 +20,352 @@
 
     <Grid Background="White">
         <TextBlock HorizontalAlignment="Left" Margin="20,5,0,0" TextWrapping="Wrap" Text="Bottom Reinforcement" VerticalAlignment="Top"/>
-        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Margin="0,30,0,0" Width="400" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Margin="10,30,0,0" Width="536" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Radial" Margin="-4,-6,-36,2">
-                <Grid Background="{StaticResource ExpanderBackgroudBrush}" Margin="32,-6,-2,11">
+                <Grid Background="{StaticResource ExpanderBackgroudBrush}" Margin="32,-6,-8,11">
 
-                    <Label FontSize="12" Content="Spacing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+
+                    <!--No.LargeDiameter1-->
+                    <Label FontSize="12" Content="No.LargeDiameter" HorizontalAlignment="Left" Margin="0,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.551,2.423" Height="26" Width="115"/>
+                    <TextBox                                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding No_LargeDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                        HorizontalAlignment="Left" Height="23" Margin="120,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
+                    <!--No.LargeDiameter2-->
+                    <TextBox
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding No_LargeDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"   
+                        HorizontalAlignment="Left" Height="23" Margin="184,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+                    
+                    <!--BTR_LargeDiameter1-->
+                    <Label Content="LargeDiameter" HorizontalAlignment="Left" Margin="0,45,0,0" VerticalAlignment="Top" Width="115"/>
+                    <ComboBox
+                        x:Name="UI_ComboBox_BR_LargeDiameter1"
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        ItemsSource="{Binding ListOfDiameters , Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndexDiameter_LD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        HorizontalAlignment="Left" Margin="120,45,0,0" VerticalAlignment="Top" Width="49"/>
+
+                    <!--BTR_LargeDiameter2-->
+                    <ComboBox
+                        x:Name="UI_ComboBox_BR_LargeDiameter2"
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        ItemsSource="{Binding ListOfDiameters2 , Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndexDiameter_LD2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        HorizontalAlignment="Left" Height="23" Margin="184,44,0,0" VerticalAlignment="Top" Width="49" />
+
+                    <!--BTR_No.SmallDiameter1-->
+                    <Label Content="No. Small Diameter" HorizontalAlignment="Left" Margin="0,76,0,0" VerticalAlignment="Top" Width="115"/>
                     <TextBox 
-                      x:Name="UI_TextBox_BTR_No_LargeDiameter"            
-                      HorizontalAlignment="Left" Height="23" Margin="141,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" RenderTransformOrigin="-0.346,-1.87">
-                        <i:Interaction.Behaviors>
-                            <Behaviors:NumericBehaviour InitialValue="0"/>
-                        </i:Interaction.Behaviors>
-                    </TextBox>
+                        x:Name="UI_TextBox_BR_No_SmallDiameter1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding No_SmallDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="120,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.456,3.043"/>
+                    
+                    <!--BTR_No.SmallDiameter2-->
+                    <TextBox
+                        x:Name="UI_TextBox_BR_No_SmallDiameter2"   
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding No_SmallDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="184,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
 
-                </Grid>
+                    <!--BTR_SmallDiameter2-->
+                    <Label Content="SmallDiameter" HorizontalAlignment="Left" Margin="0,107,0,0" VerticalAlignment="Top" Width="105"/>
+                    <ComboBox 
+                        x:Name="UI_ComboBox_BR_SmallDiameter"
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        ItemsSource="{Binding ListOfDiameters , Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndexDiameter_SD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        HorizontalAlignment="Left" Margin="120,111,0,0" VerticalAlignment="Top" Width="49"/>
+                    <!--BTR_SmallDiameter2-->    
+                    <ComboBox
+                        x:Name="UI_ComboBox_BR_SmallDiameter2"
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        ItemsSource="{Binding ListOfDiameters2, Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndexDiameter_LD2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        HorizontalAlignment="Left" Height="23" Margin="184,110,0,0" VerticalAlignment="Top" Width="49" />
 
+                    <!--BTR_No.3rdDiameter1-->
+                    <Label Content="No. 3rd Diameter" HorizontalAlignment="Left" Margin="0,138,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox
+                        x:Name="UI_TextBox_BR_No_3rdDiameter1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding No_3rdDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   
+                        HorizontalAlignment="Left" Height="23" Margin="120,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.456,3.043"/>
+                    <!--BTR_No.3rdDiameter2-->
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_No_3rdDiameter2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding No_3rdDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="184,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+
+                    <!--BTR_3rdDiameter-->
+                    <Label Content="3rd Diameter" HorizontalAlignment="Left" Margin="0,169,0,0" VerticalAlignment="Top" Width="115"/>
+                    <ComboBox 
+                         x:Name="UI_ComboBox_BTR_3rdDiameter1"
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        ItemsSource="{Binding  ListOfDiameters , Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndexDiameter_3D, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        HorizontalAlignment="Left" Margin="120,173,0,0" VerticalAlignment="Top" Width="49"/>
+                        
+                    <ComboBox
+                        x:Name="UI_ComboBox_BR_3rdDiameter2"
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        ItemsSource="{Binding ListOfDiameters2, Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndexDiameter_3D2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        HorizontalAlignment="Left" Height="23" Margin="184,172,0,0" VerticalAlignment="Top" Width="49" />
+
+                    <!--Unreinforced Core1-->
+                    <Label Content="Unreinforced Core" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" Width="115"/>
+                    <TextBox
+                        x:Name="UI_TextBox_BR_UnreinforcedCore1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding UnreinforcedCore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="120,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextChanged="TextBox_TextChanged"/>
+                    <!--Unreinforced Core2-->    
+                    <TextBox
+                         x:Name="UI_TextBox_BR_UnreinforcedCore2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding UnreinforcedCore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="184,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+                        
+                    <!--SpacingAngle1-->
+                    <Label Content="Spacing Angle" HorizontalAlignment="Left" Margin="0,231,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_SpacingAngle1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding SpacingAngle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="120,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
+                    <!--SpacingAngle2-->                    
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_SpacingAngle2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding SpacingAngle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"                   
+                        HorizontalAlignment="Left" Height="23" Margin="184,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+                    
+                    <!--LargeDiameterOffsetFromCenter1-->
+                    <Label Content="LargeDiameterOffsetCenter" HorizontalAlignment="Left" Margin="0,262,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_LargeDiameterOffsetFromCenter1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding LargeDiameterOffsetFromCenter , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="False"
+                        HorizontalAlignment="Left" Height="23" Margin="120,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.272,0.159" />
+                    <!--LargeDiameterOffsetFromCenter2-->
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_LargeDiameterOffsetFromCenter2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding LargeDiameterOffsetFromCenter , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="False"
+                        HorizontalAlignment="Left" Height="23" Margin="184,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+
+                    <!--SmallDiameterOffsetFromCenter1-->
+                    <Label Content="SmallDiameterOffsetFromCenter" HorizontalAlignment="Left" Margin="0,293,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox
+                        x:Name="UI_TextBox_BR_SmallDiameterOffsetFromCenter1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding SmallDiameterOffsetFromCenter , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="120,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
+                    
+                    <!--SmallDiameterOffsetFromCenter2-->
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_SmallDiameterOffsetFromCenter2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding SmallDiameterOffsetFromCenter , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"   
+                        HorizontalAlignment="Left" Height="23" Margin="184,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+
+                    <!--3rdDiameterOffsetFromCenter1-->
+                    <Label Content="3rdDiameterOffsetFromCenter" HorizontalAlignment="Left" Margin="0,324,0,0" VerticalAlignment="Top" Width="115"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_ThirdDiameterOffsetFromCenter1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding ThirdDiameterOffsetFromCenter , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="120,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+                    <!--3rdDiameterOffsetFromCenter2-->
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_ThirdDiameterOffsetFromCenter2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding ThirdDiameterOffsetFromCenter , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="184,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" />
+                    
+                    <!--HookType1-->
+                    <Label FontSize="12" Content="HookType" HorizontalAlignment="Left" Margin="0,351,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.551,2.423" Height="26" Width="100"/>
+                    <ComboBox 
+                        x:Name="UI_TextBox_BR_HookType1"
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        ItemsSource="{Binding  HookTypes, Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndex_HT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Margin="120,355,283,0" VerticalAlignment="Top"/>
+                    <!--HookType2-->    
+                    <ComboBox 
+                        x:Name="UI_TextBox_BR_HookType2"
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        ItemsSource="{Binding HookTypes2, Mode=OneWay}"
+                        SelectedIndex="{Binding SelectedIndex_HT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Margin="184,355,219,0" VerticalAlignment="Top"/>
+
+                    <!--BTR_OverlappLargeDiameter1-->
+                    <Label Content="OverLargeD" HorizontalAlignment="Left" Margin="243,7,0,0" VerticalAlignment="Top"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_OverlappLargeDiameter1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding OverlappLargeDiameter , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="329,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.183,0.551"/>
+
+                    <!--BTR_OverlappLargeDiameter2-->
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_OverlappLargeDiameter2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding OverlappLargeDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="391,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.183,0.551"/>
+                    
+                    <!--BTR_OverlappSmallDiameter1-->
+                    <Label Content="OverSmallD" HorizontalAlignment="Left" Margin="243,41,0,0" VerticalAlignment="Top"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_OverlappSmallDiameter1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding OverlappSmallDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="329,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.183,0.551"/>
+                    <!--BTR_OverlappSmallDiameter2-->
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_OverlappSmallDiameter2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding OverlappSmallDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="391,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.183,0.551"/>
+                    
+                    <!--BTR_Overlapp3rdDiameter-->
+                    <Label Content="Over3rdD" HorizontalAlignment="Left" Margin="243,72,0,0" VerticalAlignment="Top"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_Overlapp3rdDiameter"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding Overlapp3rdDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        
+                        HorizontalAlignment="Left" Height="23" Margin="329,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+
+                    <!--BTR_Spacing3rdDiameterAngle1-->
+                    <Label Content="Space3DA" HorizontalAlignment="Left" Margin="243,107,0,0" VerticalAlignment="Top" Width="73" RenderTransformOrigin="0.5,0.5">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-0.173"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <TextBox
+                        x:Name="UI_TextBox_BR_Spacing3rdDiameterAngle1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding Spacing3rdDiameterAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"               
+                        HorizontalAlignment="Left" Height="23" Margin="329,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+                    
+                    <!--BTR_Spacing3rdDiameterAngle2-->
+                    <TextBox
+                        x:Name="UI_TextBox_BR_Spacing3rdDiameterAngle2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding Spacing3rdDiameterAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"               
+                        HorizontalAlignment="Left" Height="23" Margin="391,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+
+                    <!-- BTR_StartOffsetAngle1-->
+                    <Label Content="StOffAngle" HorizontalAlignment="Left" Margin="243,138,0,0" VerticalAlignment="Top" Width="73"/>
+                    <TextBox 
+                        IsEnabled="False"           
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding StartOffsetAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                     
+                        HorizontalAlignment="Left" Height="23" Margin="329,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.15,0.493"/>
+
+                    <!-- BTR_StartOffsetAngle2-->
+                    <TextBox 
+                        IsEnabled="False"           
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding StartOffsetAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                     
+                        HorizontalAlignment="Left" Height="23" Margin="391,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.15,0.493"/>
+
+                    <!--BTR_MaximumLength1-->
+                    <Label Content="MaxLength" HorizontalAlignment="Left" Margin="243,169,0,0" VerticalAlignment="Top" Width="73"/>
+                    <TextBox
+                        x:Name="UI_TextBox_BR_MaximumLength1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding MaximumLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                 
+                        HorizontalAlignment="Left" Height="23" Margin="329,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+                    
+                    <!--BTR_MaximumLength2-->
+                    <TextBox
+                        x:Name="UI_TextBox_BR_MaximumLength2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding MaximumLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                 
+                        HorizontalAlignment="Left" Height="23" Margin="391,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="1.386,0.681"/>
+
+                    <!--Min_Core1-->
+                    <Label Content="Min Core" HorizontalAlignment="Left" Margin="243,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.061,-0.282" Width="72"/>
+                    <TextBox 
+                        IsEnabled="False"
+                        x:Name="UI_TextBox_BR_Min_Core1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding MinCore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="329,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="-1.216,0.333"/>
+                    <!--Min_Core2-->
+                    <TextBox 
+                        IsEnabled="False"
+                        x:Name="UI_TextBox_BR_Min_Core2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding MinCore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="391,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+                    
+                    <!--Min_SpaceField1-->
+                    <Label Content="Min SpaceField" HorizontalAlignment="Left" Margin="243,231,0,0" VerticalAlignment="Top" Width="72"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_Min_SpaceField1"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding MinSpaceField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="329,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+                    
+                    <!--Min_SpaceField2-->
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_Min_SpaceField2"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial2}"
+                        Text="{Binding MinSpaceField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Left" Height="23" Margin="391,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+                    
+                    <!--Min_SpaceCenter-->
+                    <Label Content="Min SpaceCenter" HorizontalAlignment="Left" Margin="243,262,0,0" VerticalAlignment="Top" Width="73"/>
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_Min_Space_center"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding MinSpaceCenter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                   
+                        HorizontalAlignment="Left" Height="23" Margin="329,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.235,0.928"/>
+                    
+                    
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_Overlapp3rdDiameter_Copy"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding Overlapp3rdDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        
+                        HorizontalAlignment="Left" Height="23" Margin="391,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+                    
+                    
+                    
+                    
+                    
+                    <TextBox 
+                        x:Name="UI_TextBox_BR_Min_Space_center_Copy"                       
+                        DataContext="{Binding Prop_DataModel_BR_Radial1}"
+                        Text="{Binding MinSpaceCenter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                   
+                        HorizontalAlignment="Left" Height="23" Margin="391,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
+
+
+
+
+
+
+
+
+
+
+                    <!---->                 
+               </Grid>
             </TabItem>
-
             <TabItem Header="Circular" Margin="-4,-6,-37,2">
                 <Grid Background="{StaticResource ExpanderBackgroudBrush}" Margin="33,-6,-2,11"/>
             </TabItem>

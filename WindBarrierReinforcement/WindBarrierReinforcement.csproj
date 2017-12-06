@@ -81,7 +81,11 @@
     <Compile Include="Common\ValueConverters\NegateBool.cs" />
     <Compile Include="DataModels\NSPage01\DataModel_Global_Coordinations_GroundPoint.cs" />
     <Compile Include="DataModels\NSPage01\DataModel_Global_Formwork.cs" />
-    <Compile Include="DataModels\NSPAge03\DataModel_ScrewPiles.cs" />
+    <Compile Include="DataModels\NSPage04\DataModel_BR_Circular.cs" />
+    <Compile Include="DataModels\NSPage04\DataModel_BR_Radial1.cs" />
+    <Compile Include="Common\Eng\EHookType.cs" />
+    <Compile Include="DataModels\NSPage04\DataModel_BR_Radial2.cs" />
+    <Compile Include="DataModels\NSPge03\DataModel_ScrewPiles.cs" />
     <Compile Include="DataModels\NSPage06\DataModel_BR_D1.cs" />
     <Compile Include="DataModels\NSPage06\DataModel_BR_D2.cs" />
     <Compile Include="DataModels\NSPage06\DataModel_BR_L.cs" />
@@ -240,7 +244,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\UPBR_1.jpg">

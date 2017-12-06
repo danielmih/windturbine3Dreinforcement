@@ -66,7 +66,7 @@ namespace WindBarrierReinforcement.DataModels.NSPAge03
             set { pileDepth = value; NotifyPropertyChanged("PileDepth"); }
         }
 
-        private string materialPiles;
+        private string materialPiles= "C12/45-OB";
         public string MaterialPiles
         {
             get { return materialPiles; }
@@ -187,6 +187,8 @@ namespace WindBarrierReinforcement.DataModels.NSPAge03
         }
 
         public List<String> PR_Ureinforcement_RebarDiam => EnumHelpers.GetEnumDisplayText(typeof(EDiameters));
+
+
 
     }
 }
